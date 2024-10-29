@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+‼️App is still in development!‼️
 
-## Getting Started
+# Clipio 🎥
 
-First, run the development server:
+Created by Etai Gabbai on 10/29/2024
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## How It Works 🤔
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Clipio leverages a Next.js 14 front-end to generate captions meant for short-form content. The backend written in Python 3.10, uses FFMPEG to add captions to the video. Deepgram and it's API are used to generate captions and save them as an srt. The backend handles video uploads, transcription, exporting and more. [NeonDB's Postgres](https://neon.tech) is used for storing user data via [DrizzleORM](https://orm.drizzle.team/), and [Clerk](https://clerk.com) is used for authentication.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Requirements
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Next.js 14+
+- Node.js
+- DeepGram API Key
+- Python 3.10
+- Flask
+- FFMpeg
 
-## Learn More
+## Installation 👩‍💻
 
-To learn more about Next.js, take a look at the following resources:
+1. Clone the repository: `git clone https://github.com/DevEtaiGabbai/clipio.git`
+2. Navigate to the project directory and run `npm install`
+3. Change directory to the `python` folder and install the dependencies: `pip install -r requirements.txt`
+4. Start the Google Cloud Function locally: `python server.py` (or `python3` depending on your system)
+5. Rename `python/.env.example` to `.env` and set `DEEPGRAM_API_KEY` to your Deepgram API key which can be accessed [here](https://console.deepgram.com/). 
+6. Return to the project root directory and run the development server: `npm run dev`
+7. Open [localhost:3000](http://localhost:3000) in your browser and you're all set!
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contributing & Improving 📈
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The clone currently fulfills its basic purpose, but there’s always room for enhancement!
 
-## Deploy on Vercel
+Feel free to dive into the code and contribute at any skill level. Here are some potential improvements:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- [ ] Store projects in Database
+- [ ] Implement Stripe subscriptions
+- [ ] Deploy to vercel
+- [ ] Improve captioning interface and it's functionalities
+- [ ] Make downloads and exports faster
+- [ ] Add different export formats and qualities
+- [ ] Add more AI features
+- [ ] Fix captioning delay
+- [ ] Display all of a users projects on dashboard
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Developers and Maintainers
+
+**Etai Gabbai** - [GitHub](https://github.com/DevEtaiGabbai)
