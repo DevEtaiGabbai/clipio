@@ -1,3 +1,5 @@
+/// <reference types="next/image-types/global" />
+
 "use client";
 
 import React, { useState } from 'react';
@@ -25,29 +27,31 @@ import { Separator } from '@/components/ui/separator';
 
 const font3 = Plus_Jakarta_Sans({ subsets: ['latin'] })
 
+type StringStyleField =
+    | 'textAlign' | 'backgroundColor' | 'animateValue' | 'popUpAnimation'
+    | 'shadowMode' | 'shadowNone' | 'shadowS' | 'shadowM' | 'shadowL'
+    | 'caseMode' | 'myWeight' | 'fontMode' | 'emojiMode' | 'emojiBottom'
+    | 'emojiTop' | 'emojiNone' | 'color1' | 'color2' | 'color3'
+    | 'displayMode' | 'colorF' | 'shadow' | 'shadowColor' | 'selectColor';
+
+type NumberStyleField =
+    | 'animationSpeed' | 'captionSize' | 'yPos' | 'xPos' | 'offsetX' | 'offsetY' | 'blur';
+
+type StateProps<K extends string, T> = {
+    [P in K]: T;
+} & {
+    [P in `set${Capitalize<K>}`]: React.Dispatch<React.SetStateAction<T>>;
+};
+
+type StyleProps = StateProps<StringStyleField, string>
+    & StateProps<NumberStyleField, number>
+    & StateProps<'noneAnimation', boolean>;
+
 const Style = ({
     textAlign,
     setTextAlign,
-    animationSpeed,
-    setAnimationSpeed,
-    backgroundColor,
-    setBackgroundColor,
     animateValue,
     setAnimateValue,
-    noneAnimation,
-    setNoneAnimation,
-    popUpAnimation,
-    setPopUpAnimation,
-    shadowMode,
-    setShadowMode,
-    shadowNone,
-    setShadowNone,
-    shadowS,
-    setShadowS,
-    shadowM,
-    setShadowM,
-    shadowL,
-    setShadowL,
     caseMode,
     setCaseMode,
     myWeight,
@@ -56,18 +60,6 @@ const Style = ({
     setFontMode,
     emojiMode,
     setEmojiMode,
-    emojiBottom,
-    setEmojiBottom,
-    emojiTop,
-    setEmojiTop,
-    emojiNone,
-    setEmojiNone,
-    color1,
-    setColor1,
-    color2,
-    setColor2,
-    color3,
-    setColor3,
     displayMode,
     setDisplayMode,
     colorF,
@@ -75,11 +67,7 @@ const Style = ({
     captionSize,
     setCaptionSize,
     yPos,
-    setYPos,
     xPos,
-    setXPos,
-    shadow,
-    setShadow,
     offsetX,
     setOffsetX,
     offsetY,
@@ -88,99 +76,9 @@ const Style = ({
     setBlur,
     shadowColor,
     setShadowColor,
-    selectColor,
-    setSelectColor,
-}) => {
+}: StyleProps) => {
     const [borderActive, setBorderActive] = useState(false)
     const [bgColorMode, setBgColorMode] = useState('none'); // Default shadow mode
-    const handleCaptionSizeChange = (event) => {
-        setCaptionSize(event.target.value);
-    };
-
-    const handleCaptionYChange = (event) => {
-        setYPos(event.target.value);
-    };
-
-    const handleCaptionXChange = (event) => {
-        setXPos(event.target.value);
-    };
-
-    const handleColorFChange = (event) => {
-        setColorF(event.target.value);
-    };
-
-    const handleDivClick = () => {
-        document.getElementById('hiddenColorInput').click();
-    };
-
-    const handleColor1Change = (event) => {
-        setColor1(event.target.value);
-    };
-
-    const handleColor2Change = (event) => {
-        setColor2(event.target.value);
-    };
-
-    const handleColor3Change = (event) => {
-        setColor3(event.target.value);
-    };
-
-    const handleFontChange = (font) => {
-        // Update the font used in your application
-        setFontMode(font);
-    };
-
-    const handleMyWeight = (font) => {
-        // Update the font used in your application
-        setMyWeight(font);
-    };
-
-    const handleCaseUpper = (event) => {
-        // Update the font used in your application
-        setCaseMode('uppercase');
-    };
-    const handleCaseLower = (event) => {
-        // Update the font used in your application
-        setCaseMode('lowercase');
-    };
-    const handleCaseNone = (event) => {
-        // Update the font used in your application
-        setCaseMode('none');
-    };
-
-    const handleShadowNone = (event) => {
-        // Update the font used in your application
-        setShadowMode('none');
-    };
-
-    const handleBackgroundColorChange = (event) => {
-        setBackgroundColor(event.target.value);
-    };
-
-    const handleSelectColorChange = (event) => {
-        setSelectColor(event.target.value);
-    };
-
-    const handleAnimationSpeed = (event) => {
-        setAnimationSpeed(event.target.value);
-    };
-
-    const handleOffsetXChange = (event) => {
-        setOffsetX(event.target.value);
-    };
-
-    const handleOffsetYChange = (event) => {
-        setOffsetY(event.target.value);
-    };
-
-    const handleBlurChange = (event) => {
-        setBlur(event.target.value);
-    };
-
-    const handleShadowColorChange = (event) => {
-        setShadowColor(event.target.value);
-    };
-
 
     const z = 0; // Replace with the number of decimal places you want
     const percentage = (((yPos - 1) / (500 - 1)) * 100).toFixed(z);

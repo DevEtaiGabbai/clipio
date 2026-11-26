@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { VideoControls } from './VideoControls';
 import { CaptionsRenderer } from './CaptionsRenderer';
 import { motion } from "framer-motion";
-import parseSrt from 'parse-srt';
+import parseSrt, { type SrtItem } from 'parse-srt';
 import html2canvas from "html2canvas";
 import { Check, File, Zap } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
@@ -40,7 +40,7 @@ interface VideoPlayerProps {
   setVideoProgress: (progress: number) => void;
   setBgDownloading: (downloading: boolean) => void;
   setIsVisible: (visible: boolean) => void;
-  onOpen: () => void;
+  onOpen?: () => void;
 }
 
 export default function VideoPlayer({
@@ -123,7 +123,7 @@ export default function VideoPlayer({
       // Update captions based on displayMode
       const currentTime = videoRef.current.currentTime;
       let lineIndex;
-      let lineCaptions;
+      let lineCaptions: SrtItem[] | undefined;
 
       switch (displayMode) {
         case '2 lines':
@@ -143,7 +143,7 @@ export default function VideoPlayer({
           break;
       }
 
-      if (lineCaptions?.length > 0) {
+      if (lineCaptions && lineCaptions.length > 0) {
         const words = lineCaptions.flatMap(caption => caption.text.split(' '));
         setCurrentLine(words.join(' '));
         setCurrentWord(words[0]); // Set first word as current word
@@ -187,7 +187,7 @@ export default function VideoPlayer({
             link.click();
             document.body.removeChild(link);
 
-            onOpen();
+            onOpen!();
             setBgDownloading(false);
             setIsVisible(true);
           }
@@ -198,7 +198,7 @@ export default function VideoPlayer({
         }
       }
 
-      const canvas = document.querySelector('#captionsContainer');
+      const canvas = document.getElementById('captionsContainer');
       if (canvas) {
         const render = await html2canvas(canvas, { backgroundColor: null });
         const dataUrl = render.toDataURL();

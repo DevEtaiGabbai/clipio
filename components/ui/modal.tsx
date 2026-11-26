@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { useRouter } from "next/navigation";
-import { useMediaQuery } from "usehooks-ts";
+import { useMedia } from "react-use";
 import { Dialog } from "./dialog";
 import { Drawer } from "./drawer";
 
@@ -27,7 +27,7 @@ const Modal = ({ children, isOpen, setIsOpen, onClose }: Props) => {
         }
     };
 
-    const isDesktop = useMediaQuery("(max-width: 768px)");
+    const isDesktop = useMedia("(max-width: 768px)", false);
 
     if (isDesktop) {
         return (

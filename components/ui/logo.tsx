@@ -1,5 +1,5 @@
 import React from 'react'
-import { Icons } from "@/components";
+import { Icons } from "@/components/ui/icons";
 import { cn } from "@/utils";
 
 interface Props {
