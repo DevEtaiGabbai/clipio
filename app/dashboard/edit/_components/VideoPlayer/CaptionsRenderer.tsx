@@ -1,5 +1,6 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import { motion } from "framer-motion";
 import { Rnd } from "react-rnd";
 
@@ -53,9 +54,9 @@ export function CaptionsRenderer({
   const baseStyle = {
     fontFamily: `'${fontMode}', sans-serif`,
     fontWeight: myWeight,
-    textTransform: caseMode as any,
+    textTransform: caseMode as CSSProperties['textTransform'],
     textShadow: shadowMode,
-    textAlign: textAlign as any,
+    textAlign: textAlign as CSSProperties['textAlign'],
   };
 
   const renderCaptionContent = () => {
@@ -76,7 +77,7 @@ export function CaptionsRenderer({
               style={{ 
                 scale: externalLineDurationPercent,
                 borderRadius: '10px',
-                backgroundColor: currentLine ? backgroundColor : null,
+                backgroundColor: currentLine ? backgroundColor : undefined,
                 position: 'absolute',
                 inset: 0,
                 zIndex: -1,

@@ -1,18 +1,12 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import parseSrt from 'parse-srt';
+import parseSrt, { type SrtItem } from 'parse-srt';
 import TranscriptItem from './TranscriptItem';
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Settings, Paintbrush } from "lucide-react";
-
-interface SrtItem {
-  start: number;
-  end: number;
-  text: string;
-}
 
 interface TranscriptionEditorProps {
   srt: string;
